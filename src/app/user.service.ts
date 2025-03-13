@@ -18,20 +18,20 @@ export class UserService {
 
   login(email: string, password: string): boolean {
     let users = this.getUsers();
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
+    const user = users.find(u => u.email === email && u.password === password); //search/look for a user matching the email and password
+    if (user) { //if a user is found store their email in sessionStorage under loggedInuser
       sessionStorage.setItem('loggedInUser', email);
-      return true;
+      return true; //return true indicating a successful login
     }
     return false;
   }
 
   getUsers(): { email: string; password: string }[] {
-    return JSON.parse(sessionStorage.getItem(this.sessionKey) || '[]');
+    return JSON.parse(sessionStorage.getItem(this.sessionKey) || '[]'); //if there are no users return an empty array //converts the stored json back into an array
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('loggedInUser') !== null;
+    return sessionStorage.getItem('loggedInUser') !== null; //returns true if loggedIn user exists, else returns false
   }
 
   logout(): void {
